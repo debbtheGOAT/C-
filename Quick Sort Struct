@@ -1,0 +1,83 @@
+/////////////QuickSortStruct.h
+struct datatype{
+		char name[10];
+		int n[4];  
+	};
+	
+int QuickSorting(datatype data[5], int f, int l, int index);
+int QuickMove(datatype data[5], int f, int l, int index);
+
+
+/////////////QuickSortStruct.cpp
+#include "stdio.h"
+#include "stdlib.h"
+#include "QuickSortStruct.h"
+
+int main(){
+	datatype data[5];
+	for(int i =0; i<5; i++){
+		printf("請輸入學生名字:");
+		scanf("%s",data[i].name);
+		printf("請輸入國文成績:");
+		scanf("%d",&data[i].n[0]);
+		printf("請輸入英文成績:");
+		scanf("%d",&data[i].n[1]);
+		printf("請輸入數學成績:");
+		scanf("%d",&data[i].n[2]);
+		data[i].n[3] = data[i].n[0]+ data[i].n[1]+ data[i].n[2];
+		printf("\n");
+	}
+
+	printf("使用快速排序法(Quick Sort)排列後:\n\n");
+	QuickSorting(data, 0, 4, 0);
+	printf("***國文成績***\n");
+	for(int i=4;i>=0;i--){
+		printf("第%d名: %s, 成績:%d \n", 5-i, data[i].name, data[i].n[0]);
+	}
+	printf("\n\n");
+	QuickSorting(data, 0, 4, 1);
+	printf("***英文成績***\n");
+	for(int i=4;i>=0;i--){
+		printf("第%d名: %s, 成績:%d \n", 5-i, data[i].name, data[i].n[1]);
+	}
+	printf("\n");
+	QuickSorting(data, 0, 4, 2);
+	printf("***數學成績***\n");
+	for(int i=4;i>=0;i--){
+		printf("第%d名: %s, 成績:%d \n", 5-i, data[i].name, data[i].n[2]);
+	}
+	printf("\n");
+	QuickSorting(data, 0, 4, 3);
+	printf("***總成績***\n");
+	for(int i=4;i>=0;i--){
+		printf("第%d名: %s, 成績:%d \n", 5-i, data[i].name, data[i].n[3]);
+	}
+	printf("\n");
+	return 0;	
+}
+
+int QuickSorting(datatype data[5], int f, int l, int index){
+	int k = QuickMove(data, f, l, index);
+	if (k-1 > f) QuickSorting(data, f, k-1, index);
+	if (l > k+1) QuickSorting(data, k+1, l, index);	
+}
+
+int QuickMove(datatype data[5], int f, int l, int index){
+	if(f==l) return 1;
+	int t = data[l].n[index];
+	int m = l;
+	int p = l;
+	for(int i=f; i<=l; i++){
+		if (data[i].n[index]>t){
+			datatype k = data[i];
+			for(int j = i; j<m; j++){
+				data[j]=data[j+1];
+			}
+			data[m] = k;
+			i--; 
+			l--;
+			p--;
+		}
+	}
+	return p;
+}
