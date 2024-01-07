@@ -1,0 +1,64 @@
+// QuickSort.h
+int QuickSorting(int data[20], int f, int l);
+int QuickMove(int data[20], int f, int l);
+
+// QuickSort.cpp
+#include "stdio.h"
+#include "stdlib.h"
+#include "time.h"
+#include "QuickSort.h"
+
+int main(){
+	int data[20];
+	for(int i=0;i<20 ;i++){
+		int m=0, n=1;
+		while(n==1){
+			n=0;
+			srand((unsigned)time(NULL));
+			m = (rand()*(rand()%10))%100;
+			// 以時間序列當亂數種子 取0-99的亂數 
+			for(int j=0;j<i;j++){
+				if(m==data[j]) n=1;
+			}	
+		}
+		data[i]=m;
+	}
+	printf("有20筆資料值:\n"); 
+	for(int i=0;i<20 ;i++){
+		printf("%d, ", data[i]);
+	}
+	printf("\n\n");
+	QuickSorting(data, 0, 19);
+	printf("使用快速排序法(Quick Sort)排列後:\n");
+	for(int i=0;i<20 ;i++){
+		printf("%d, ", data[i]);
+	}
+	printf("\n");
+	return 0;	
+}
+
+int QuickSorting(int data[20], int f, int l){
+	int k = QuickMove(data, f, l);
+	if (k-1 > f) QuickSorting(data, f, k-1);
+	if (l > k+1) QuickSorting(data, k+1, l);	
+}
+
+int QuickMove(int data[20], int f, int l){
+	if(f==l) return 1;
+	int t = data[l];
+	int m = l;
+	int p = l;
+	for(int i=f; i<=l; i++){
+		if (data[i]>t){
+			int k = data[i];
+			for(int j = i; j<m; j++){
+				data[j]=data[j+1];
+			}
+			data[m] = k;
+			i--; 
+			l--;
+			p--;
+		}
+	}
+	return p;
+}
