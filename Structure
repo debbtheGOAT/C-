@@ -1,0 +1,123 @@
+一筆資料同時包含多個欄位
+結構宣告 “struct”
+
+struct 結構名稱{
+資料型態 資料名稱;
+}
+
+例如: 宣告一個結構, 名稱為data, 內容包含:學生姓名(字串)、數學成績(整數型態) 、國文成績(整數型態) 、英文成績(整數型態)
+
+struct data{
+char name[10]; //學生姓名
+int m; //數學成績 
+int c; //國文成績
+int e; //英文成績
+};
+
+data student; //此時student就包含了學生姓名、數學成績、國文成績、英文成績)
+
+student.name //學生姓名
+student.m //數學成績
+student.c //國文成績
+student.e //英文成績
+
+
+1.請輸入並顯示一個學生姓名與三科成績及總分:
+
+#include "stdio.h"
+#include "stdlib.h"
+
+int main(void){
+	struct data{
+		char name[10]; 	//學生姓名
+		int c;			//國文成績
+		int e;			//英文成績
+		int m; 			//數學成績
+		int total=0;	//總分
+	};
+	data student;
+	
+	printf("請輸入學生名字:");
+	scanf("%s",student.name);
+	printf("請輸入國文成績:");
+	scanf("%d",&student.c);
+	printf("請輸入英文成績:");
+	scanf("%d",&student.e);
+	printf("請輸入數學成績:");
+	scanf("%d",&student.m);
+	student.total = student.c+student.e+student.m;
+	printf("姓名:%s, 國文:%d, 英文:%d, 數學:%d, 總分:%d", student.name, student.c, student.e, student.m, student.total);
+	printf("\n");
+
+	return 0;	
+}
+
+
+2.一筆資料同時包含多個欄位, 請輸入並顯示一個學生姓名與三科成績及總分:
+
+#include "stdio.h"
+#include "stdlib.h"
+
+int main(void){
+	struct data{
+		char name[10];
+		int score[3];
+		int total=0;
+	};
+	
+	data student;
+	
+	printf("請輸入學生名字:");
+	scanf("%s",student.name);
+	printf("請輸入國文成績:");
+	scanf("%d",&student.score[0]);
+	printf("請輸入英文成績:");
+	scanf("%d",&student.score[1]);
+	printf("請輸入數學成績:");
+	scanf("%d",&student.score[2]);
+	for(int i=0; i<3; i++){
+		student.total += student.score[i];
+	}	
+	printf("%s, %d, %d, %d, %d", student.name, student.score[0], student.score[1], student.score[2], student.total);
+	printf("\n");
+
+	return 0;	
+}
+
+
+3.多筆資料同時包含多個欄位, 請輸入並顯示三個學生姓名與其三科成績:
+
+#include "stdio.h"
+#include "stdlib.h"
+
+int main(void){
+	struct data{
+		char name[10];
+		int score[3];
+		int total=0;
+	};
+	
+	data student[3];
+	
+	for(int i =0; i<3; i++){
+		printf("請輸入學生名字:");
+		scanf("%s",student[i].name);
+		printf("請輸入國文成績:");
+		scanf("%d",&student[i].score[0]);
+		printf("請輸入英文成績:");
+		scanf("%d",&student[i].score[1]);
+		printf("請輸入數學成績:");
+		scanf("%d",&student[i].score[2]);
+		for(int j = 0; j<3; j++){
+			student[i].total += student[i].score[j];
+		}
+	}
+
+	for(int i =0; i<3; i++){
+		printf("姓名:%s, 國文:%d, 英文:%d, 數學:%d, 總分:%d", student[i].name, student[i].score[0], student[i].score[1], student[i].score[2], student[i].total);
+		printf("\n");
+	}
+
+	return 0;	
+}
+
