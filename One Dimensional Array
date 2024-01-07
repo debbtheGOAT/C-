@@ -17,3 +17,49 @@ int main(void){
 https://openhome.cc/Gossip/CGossip/OneDimArray.html
 
 已知宣告一正數型態之一維陣列A[30], 若A[m]的記憶體位址為k, 則A[n]的記憶體位址為: k+(n-m)*4 //為啥是這樣算?
+
+
+
+1.宣告一陣列A[30]儲存費氏數列前30個數,並顯示這30個數:  //費氏數列由0和1開始，之後的費波那契數就是由之前的兩數相加而得出
+
+#include "stdio.h"
+#include "stdlib.h"
+
+int main(void){
+	int A[30];
+	
+	A[0]=0;
+	A[1]=1;
+	for(int i=0; i<28; i++){
+		A[i+2]=A[i]+A[i+1];
+	}
+	
+	printf("費氏數列第前30個的數為:	");
+	for(int i=0; i<30; i++){
+		printf("%d,", A[i]);
+	}
+	return 0;	
+}
+
+
+2.請任意輸入十個整數值並分別存入陣列A[10],並印出十個數的總和:
+
+#include "stdio.h"
+#include "stdlib.h"
+
+int main(void){
+	int A[10];
+	int sum = 0;
+	
+	for(int i=0; i<10; i++){
+		printf("請輸入第%d個數:",i+1);
+		scanf("%d",&A[i]);
+		sum += A[i];
+	}
+	
+	printf("你輸入的值的總和為:%d", sum);
+	return 0;	
+}
+
+
+
